@@ -3,9 +3,14 @@
  */
 package org.example;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest {
-    @Test public void appHasAGreeting() {
+    @Test
+    public void appMainTest() {
+        assertEquals(2, 2);
     }
 }

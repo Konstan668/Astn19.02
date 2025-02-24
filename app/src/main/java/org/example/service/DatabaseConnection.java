@@ -15,7 +15,7 @@ public class DatabaseConnection {
         String url = "jdbc:mysql://localhost:3306/test_contacts";
         Properties prop = new Properties();
         prop.put("user", "root");
-        prop.put("password", "***");
+        prop.put("password", System.getenv("DP_PASSWORD"));
         prop.put("autoReconnect", "true");
         prop.put("characterEncoding", "UTF-8");
         prop.put("useUnicode", "true");
