@@ -8,6 +8,9 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    checkstyle
+    id("org.sonarqube") version "6.0.1.5171"
+    id("com.adarshr.test-logger") version "3.2.0"
 }
 
 repositories {
@@ -21,6 +24,12 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
+    implementation("com.mysql:mysql-connector-j:9.2.0")
+
+    implementation("org.slf4j:slf4j-api:2.0.16")
+    implementation("ch.qos.logback:logback-classic:1.5.16")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -33,4 +42,23 @@ java {
 application {
     // Define the main class for the application.
     mainClass = "org.example.App"
+}
+sonar {
+    properties {
+        property("sonar.projectKey", "Konstan668_Astn19.02")
+        property("sonar.organization", "konstan668")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.token", System.getenv("SONAR_TOKEN"))
+        property("sonar.junit.reportPaths", "build/test-results/test")
+    }
+
+    tasks.test {
+        useJUnitPlatform()
+        reports {
+            junitXml.required.set(true)
+            html.required.set(true)
+        }
+    }
+
+
 }
